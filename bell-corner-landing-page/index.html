@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bell Corner | Fresh Healthy Nutrition Meals & Wellness Club</title>
+  <meta name="description"
+    content="Discover Bell Corner in Bandar Mahkota Cheras. Fresh healthy nutrition meals, signature protein smoothies, and energy teas.">
+  <meta name="keywords"
+    content="Bell Corner, Mahkota Cheras, Nutrition Meals, Healthy Light Meal, Protein Shakes, Fresh Green, Wellness Club, Cheras Health Food">
+
+  <!-- Open Graph Metadata -->
+  <meta property="og:title" content="Bell Corner | Fresh Healthy Nutrition Meals">
+  <meta property="og:description"
+    content="Nourish your body and elevate your lifestyle with gourmet, scientifically balanced nutrition meals at Bell Corner.">
+  <meta property="og:type" content="website">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css?v=14">
+</head>
+
+<body>
+
+  <!-- ==================== TOP BANNER ==================== -->
+  <div class="top-banner" id="topBanner">
+    <img src="assets/top_banner_v2.png" alt="Bell Corner Banner" class="top-banner-img">
+  </div>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" id="brandLogo">
+        <img src="assets/logo_v2.png" alt="Bell Corner Logo" class="brand-logo-img">
+        <span style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;" class="notranslate"
+          translate="no">Bell Corner</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#hero" class="nav-link active" id="navLinkHome">Home</a></li>
+          <li><a href="#about" class="nav-link" id="navLinkAbout">About Meals</a></li>
+          <li><a href="#menu" class="nav-link" id="navLinkMenu">Meal Menu</a></li>
+          <li><a href="#calculator" class="nav-link" id="navLinkCalculator">Goal Calculator</a></li>
+          <li><a href="#programs" class="nav-link" id="navLinkPrograms">Programs</a></li>
+          <li><a href="#contact" class="nav-link" id="navLinkContact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Language Selector Widget -->
+        <div class="lang-widget-container" id="langWidgetContainer">
+          <button class="lang-btn" id="langBtn" onclick="toggleLangDropdown(event)" aria-label="Translate Page"
+            title="Translate / 语言翻译">
+            <i class="fa-solid fa-globe"></i>
+            <span class="lang-current-label">Language</span>
+            <i class="fa-solid fa-chevron-down lang-chevron"></i>
+          </button>
+
+          <div class="lang-dropdown-card" id="langDropdownCard" onclick="event.stopPropagation()">
+            <div class="lang-dropdown-header">
+              <span class="lang-dropdown-title"><i class="fa-solid fa-language"></i> Select Language </span>
+              <button class="lang-close-btn" id="langCloseBtn" onclick="toggleLangDropdown(event)"
+                aria-label="Close language selector">&times;</button>
+            </div>
+
+            <div class="lang-tabs notranslate" translate="no">
+              <button class="lang-tab-btn active" data-lang="en" onclick="switchLanguage('en')">English</button>
+              <button class="lang-tab-btn" data-lang="zh-CN" onclick="switchLanguage('zh-CN')">简体中文</button>
+              <button class="lang-tab-btn" data-lang="zh-TW" onclick="switchLanguage('zh-TW')">繁體中文</button>
+              <button class="lang-tab-btn" data-lang="ms" onclick="switchLanguage('ms')">Bahasa Melayu</button>
+            </div>
+
+            <div class="lang-select-wrapper">
+              <label for="allLangSelect">More Languages / 全国语言:</label>
+              <select id="allLangSelect" class="custom-lang-select" onchange="switchLanguage(this.value)">
+                <option value="">-- Choose Language / 选择全国语言 --</option>
+                <option value="en">🇬🇧 English (英语)</option>
+                <option value="zh-CN">🇨🇳 简体中文 (Simplified Chinese)</option>
+                <option value="zh-TW">🇹🇼 繁體中文 (Traditional Chinese)</option>
+                <option value="ms">🇲🇾 Bahasa Melayu (马来语)</option>
+                <option value="ja">🇯🇵 日本語 (Japanese)</option>
+                <option value="ko">🇰🇷 한국어 (Korean)</option>
+                <option value="th">🇹🇭 ไทย (Thai)</option>
+                <option value="vi">🇻🇳 Tiếng Việt (Vietnamese)</option>
+                <option value="id">🇮🇩 Bahasa Indonesia (印尼语)</option>
+                <option value="ta">🇮🇳 தமிழ் (Tamil)</option>
+                <option value="hi">🇮🇳 हिन्दी (Hindi)</option>
+                <option value="es">🇪🇸 Español (Spanish)</option>
+                <option value="fr">🇫🇷 Français (French)</option>
+                <option value="de">🇩🇪 Deutsch (German)</option>
+                <option value="ar">🇸🇦 العربية (Arabic)</option>
+                <option value="ru">🇷🇺 Русский (Russian)</option>
+                <option value="it">🇮🇹 Italiano (Italian)</option>
+                <option value="pt">🇵🇹 Português (Portuguese)</option>
+                <option value="nl">🇳🇱 Nederlands (Dutch)</option>
+                <option value="tr">🇹🇷 Türkçe (Turkish)</option>
+                <option value="pl">🇵🇱 Polski (Polish)</option>
+                <option value="sv">🇸🇪 Svenska (Swedish)</option>
+              </select>
+              <div id="google_translate_element" style="position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; overflow: hidden;"></div>
+            </div>
+
+            <div class="lang-dropdown-footer">
+              <i class="fa-brands fa-google"></i> Powered by Google Translate
+            </div>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn btn-primary" id="btnJoinNav">
+          <i class="fa-brands fa-whatsapp"></i> Order Nutrition Meal
+        </a>
+
+        <button class="nav-toggle" id="navToggleBtn" aria-label="Toggle navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero" id="hero">
+      <div class="hero-bg-glow"></div>
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge" id="heroBadge">
+            <i class="fa-solid fa-leaf"></i> Fresh & Natural · Balanced Nutrition Meals
+          </div>
+          <h1 class="hero-title" id="heroTitle">
+            Health begins with meal <br>
+            <span class="text-gradient">Achieve health through balanced nutrition.</span>
+          </h1>
+          <p class="hero-description" id="heroDesc">
+            Welcome to <strong class="notranslate" translate="no">Bell Corner</strong>! We specialize in fresh,
+            scientifically balanced <strong>nutrition meals</strong> paired with low-calorie smoothies and energy teas
+            for a clean, vibrant lifestyle.<br>
+            Enjoy a <strong>high-quality, nutritionally balanced breakfast</strong> for a healthy start.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#menu" class="btn btn-primary" id="btnExploreMenu">
+              <i class="fa-solid fa-utensils"></i> Explore Meal Menu
+            </a>
+            <a href="#calculator" class="btn btn-secondary" id="btnCalcHero">
+              <i class="fa-solid fa-calculator"></i> Calculate Daily Intake
+            </a>
+          </div>
+
+
+        </div>
+
+        <div class="hero-image-wrapper">
+          <img src="assets/hero_meal_poster.jpg" alt="Bell Corner Creative Nutrition" class="hero-card-img"
+            id="heroImg">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT SECTION ==================== -->
+    <section class="section" id="about">
+      <div class="container about-grid">
+        <div class="about-img-container">
+          <img src="assets/about_meal_v2.jpg" alt="Bell Corner Aesthetic Nutrition Meal" class="about-img"
+            id="aboutImg">
+        </div>
+
+        <div class="about-content">
+          <span class="section-tag" id="aboutTag"><i class="fa-solid fa-heart-pulse"></i> Clean Eating Concept</span>
+          <h2 class="section-title" id="aboutTitle">Crafted for Modern Living: <span class="text-gradient">Aesthetic
+              Nutrition Meals</span> 🌿</h2>
+          <p id="aboutText1">
+            At <strong class="notranslate" translate="no">Bell Corner</strong>, we believe delicious taste and optimal
+            health go hand in hand. Every
+            nutrition meal is scientifically crafted with premium proteins, complex carbs, and rich dietary fiber.
+          </p>
+          <p id="aboutText2">
+            Whether you need a nutrient-dense morning boost, a clean lean meal for weight management, or post-workout
+            recovery, we create customized fresh green nutrition meal plans for you.
+          </p>
+
+          <div class="about-highlights">
+            <div class="highlight-item" id="hlItem1">
+              <div class="highlight-icon"><i class="fa-solid fa-check"></i></div>
+              <div class="highlight-text">
+                <h4>Balanced Macronutrient Ratio</h4>
+                <p>Controlled calories with high quality protein and light digestion.</p>
+              </div>
+            </div>
+
+            <div class="highlight-item" id="hlItem2">
+              <div class="highlight-icon"><i class="fa-solid fa-check"></i></div>
+              <div class="highlight-text">
+                <h4>Pure Fresh Ingredients</h4>
+                <p>Selected fresh vegetables and whole lean proteins.</p>
+              </div>
+            </div>
+
+            <div class="highlight-item" id="hlItem3">
+              <div class="highlight-icon"><i class="fa-solid fa-check"></i></div>
+              <div class="highlight-text">
+                <h4>Plant-Based Friendly</h4>
+                <p>Rich vegetarian and plant-protein options available.</p>
+              </div>
+            </div>
+
+            <div class="highlight-item" id="hlItem4">
+              <div class="highlight-icon"><i class="fa-solid fa-check"></i></div>
+              <div class="highlight-text">
+                <h4>Comfortable Green Aesthetic</h4>
+                <p>Crisp, refreshing experience from meals to atmosphere.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn btn-outline" id="btnBookConsult">
+            <i class="fa-solid fa-calendar-check"></i> Custom Meal Plan Consultation
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== MENU SECTION ==================== -->
+    <section class="section" id="menu">
+      <div class="container text-center">
+        <span class="section-tag" id="menuTag"><i class="fa-solid fa-utensils"></i> Fresh Nutrition Meal Menu</span>
+        <h2 class="section-title" id="menuTitle">Signature <span class="text-gradient">Nutrition Meals </span></h2>
+        <p class="section-subtitle" id="menuSubtitle">Low-calorie, high-protein, scientifically portioned, and fast-easy
+          meals for your healthy lifestyle.</p>
+
+        <!-- Menu Carousel Slider Showcase (Single Row 4 Cards Auto Slideshow) -->
+        <div class="menu-carousel-wrapper" id="menuCarouselWrapper">
+          <button class="menu-carousel-arrow menu-arrow-prev" id="menuSliderPrevBtn" aria-label="Previous Slide">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="menu-carousel-arrow menu-arrow-next" id="menuSliderNextBtn" aria-label="Next Slide">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <div class="menu-track-container" id="menuTrackContainer">
+            <div class="menu-track" id="menuTrack">
+              <!-- Card 1: Healthy Dessert Poster -->
+              <div class="menu-card" data-img="assets/menu_poster_1_v2.jpg" id="menuCard1">
+                <img src="assets/menu_poster_1_v2.jpg" alt="Bell Corner Healthy Dessert Poster" class="menu-poster-img" id="posterImg1">
+                <div class="card-zoom-overlay">
+                  <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                </div>
+              </div>
+
+              <!-- Card 2: 3 Simple Steps Poster -->
+              <div class="menu-card" data-img="assets/menu_poster_2.jpg" id="menuCard2">
+                <img src="assets/menu_poster_2.jpg" alt="3 Simple Steps Poster" class="menu-poster-img">
+                <div class="card-zoom-overlay">
+                  <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                </div>
+              </div>
+
+              <!-- Card 3: Shape Booster Poster -->
+              <div class="menu-card" data-img="assets/menu_poster_3.jpg" id="menuCard3">
+                <img src="assets/menu_poster_3.jpg" alt="Shape Booster Poster" class="menu-poster-img">
+                <div class="card-zoom-overlay">
+                  <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                </div>
+              </div>
+
+              <!-- Card 4: Beauty Drink QQ Water Poster -->
+              <div class="menu-card" data-img="assets/menu_poster_4.jpg" id="menuCard4">
+                <img src="assets/menu_poster_4.jpg" alt="Beauty Drink QQ Water Poster" class="menu-poster-img">
+                <div class="card-zoom-overlay">
+                  <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                </div>
+              </div>
+
+              <!-- Card 5: Fat Away Tea Poster -->
+              <div class="menu-card" data-img="assets/menu_poster_5.jpg" id="menuCard5">
+                <img src="assets/menu_poster_5.jpg" alt="Fat Away Tea Poster" class="menu-poster-img">
+                <div class="card-zoom-overlay">
+                  <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                </div>
+              </div>
+
+              <!-- Card 6: Power Drink Poster -->
+              <div class="menu-card" data-img="assets/menu_poster_6.jpg" id="menuCard6">
+                <img src="assets/menu_poster_6.jpg" alt="Power Drink Poster" class="menu-poster-img">
+                <div class="card-zoom-overlay">
+                  <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== GOAL CALCULATOR SECTION ==================== -->
+    <section class="section" id="calculator">
+      <div class="container">
+        <div class="calculator-card" id="calcCard">
+          <div class="text-center">
+            <span class="section-tag" id="calcTag"><i class="fa-solid fa-calculator"></i> Interactive Nutrition
+              Tool</span>
+            <h2 class="section-title" id="calcTitle">Calculate Your <span class="text-gradient">Daily Targets</span>
+            </h2>
+            <p class="section-subtitle" style="margin-bottom: 2rem;" id="calcSubtitle">Find out exactly how much protein
+              and hydration your body needs each day to thrive.</p>
+          </div>
+
+          <div class="calc-grid">
+            <div class="calc-form">
+              <div class="form-group">
+                <label for="calcWeight">Body Weight (kg)</label>
+                <input type="number" id="calcWeight" class="form-control" value="65" min="30" max="200"
+                  placeholder="e.g. 65">
+              </div>
+
+              <div class="form-group">
+                <label for="calcActivity">Daily Activity Level</label>
+                <select id="calcActivity" class="form-control">
+                  <option value="1.2">Light / Sedentary (Desk Job)</option>
+                  <option value="1.4" selected>Moderate (1-3 Workouts/week)</option>
+                  <option value="1.7">Active (4-6 Workouts/week)</option>
+                  <option value="1.9">Athlete / Heavy Training</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="calcGoal">Primary Fitness Goal</label>
+                <select id="calcGoal" class="form-control">
+                  <option value="0.9">Fat Loss & Toning</option>
+                  <option value="1.0" selected>Healthy Maintenance & Energy</option>
+                  <option value="1.25">Muscle Gain & Recovery</option>
+                </select>
+              </div>
+
+              <button class="btn btn-primary" style="width: 100%; justify-content: center;" id="calculateBtn">
+                <i class="fa-solid fa-arrows-rotate"></i> Compute Recommended Intake
+              </button>
+            </div>
+
+            <div class="calc-result-box">
+              <div class="calc-metric">
+                <div class="metric-val" id="proteinOutput">98g</div>
+                <div class="metric-label">Daily Protein Target</div>
+              </div>
+
+              <hr style="border: 0; border-top: 1px solid var(--border-glow); margin: 1.5rem 0;">
+
+              <div class="calc-metric">
+                <div class="metric-val" id="waterOutput">3.5 L</div>
+                <div class="metric-label">Recommended Water Intake</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROGRAMS SECTION ==================== -->
+    <section class="section" id="programs">
+      <div class="container text-center">
+        <span class="section-tag" id="programTag"><i class="fa-solid fa-trophy"></i> Transformation & Community</span>
+        <h2 class="section-title" id="programTitle">Join Our <span class="text-gradient">Wellness Programs</span></h2>
+        <p class="section-subtitle" id="programSubtitle">Choose a path that fits your lifestyle. Get accountability,
+          personalized meal advice, and encouragement.</p>
+
+        <!-- Programs Slideshow Showcase -->
+        <div class="programs-carousel-container" id="programsCarousel">
+          
+          <!-- Prev / Next Navigation Arrows -->
+          <button class="carousel-arrow carousel-arrow-prev" id="carouselPrevBtn" aria-label="Previous Slide">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <button class="carousel-arrow carousel-arrow-next" id="carouselNextBtn" aria-label="Next Slide">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <!-- Slides Wrapper -->
+          <div class="carousel-slides-wrapper" id="carouselSlidesWrapper">
+
+            <!-- Slide 1: 5-Day Body Detox -->
+            <div class="program-slide active" data-index="0">
+              <div class="slide-content-grid">
+                <div class="slide-poster-col">
+                  <div class="slide-poster-card" data-img="assets/program_detox_5days.jpg">
+                    <img src="assets/program_detox_5days.jpg" alt="5-Day Body Detox Program" class="slide-poster-img">
+                    <div class="card-zoom-overlay">
+                      <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="slide-info-col">
+                  <span class="slide-badge"><i class="fa-solid fa-leaf"></i> Featured Detox Reset</span>
+                  <h3 class="slide-title">5-Day Body Detox</h3>
+                  <p class="slide-desc">Clear toxins, improve digestion, and boost energy! A 5-day natural hydration & detox reset to feel lighter, healthier, and revitalized.</p>
+                  <ul class="slide-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Eliminate Toxins & Improve Digestion</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Boost Energy & Hydrate Naturally</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Glowing Skin & Natural 5-Day Reset</li>
+                  </ul>
+                  <div class="slide-cta-row">
+                    <a href="#contact" class="btn btn-primary" id="btnJoinDetox">Enroll In 5-Day Detox</a>
+                    <span class="slide-extra-tag"><i class="fa-solid fa-shield-heart"></i> 100% Natural Ingredients</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Body Index Scan & Health Check -->
+            <div class="program-slide" data-index="1">
+              <div class="slide-content-grid">
+                <div class="slide-poster-col">
+                  <div class="slide-poster-card" data-img="assets/program_health_scan.jpg">
+                    <img src="assets/program_health_scan.jpg" alt="Health Awareness & Visceral Fat Body Scan" class="slide-poster-img">
+                    <div class="card-zoom-overlay">
+                      <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="slide-info-col">
+                  <span class="slide-badge"><i class="fa-solid fa-heart-pulse"></i> Body Analysis</span>
+                  <h3 class="slide-title">Body Index Scan & Health Check</h3>
+                  <p class="slide-desc">Do you know your internal body stats? Get a comprehensive evaluation for visceral fat, body fat, muscle mass, and cardiovascular health risks.</p>
+                  <ul class="slide-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Full Body Index Scan (Fat, Muscle & Hydration)</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Visceral Fat Risk & Health Evaluation</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Personalized Health Improvement Guidance</li>
+                  </ul>
+                  <div class="slide-cta-row">
+                    <a href="#contact" class="btn btn-primary" id="btnBookScan">Book Body Scan</a>
+                    <span class="slide-extra-tag"><i class="fa-solid fa-user-doctor"></i> Instant Health Insights</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Daily Club & 1-on-1 Coaching -->
+            <div class="program-slide" data-index="2">
+              <div class="slide-content-grid">
+                <div class="slide-poster-col">
+                  <div class="slide-poster-card" data-img="assets/program_holistic_coaching.jpg">
+                    <img src="assets/program_holistic_coaching.jpg" alt="Holistic Weight Management Coaching" class="slide-poster-img">
+                    <div class="card-zoom-overlay">
+                      <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="slide-info-col">
+                  <span class="slide-badge"><i class="fa-solid fa-user-group"></i> Personalized Support</span>
+                  <h3 class="slide-title">Daily Nutrition Club & Coaching</h3>
+                  <p class="slide-desc">Start every morning right! Enjoy fresh nutrition meals, energy tea, and 1-on-1 personalized guidance tailored for your weight & fitness goals.</p>
+                  <ul class="slide-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Fresh Daily Meal + Energy Tea</li>
+                    <li><i class="fa-solid fa-circle-check"></i> 1-on-1 Personal Meal & Body Guidance</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Direct WhatsApp Check-ins & Support</li>
+                  </ul>
+                  <div class="slide-cta-row">
+                    <a href="#contact" class="btn btn-primary" id="btnPrivateCoaching">Book Private Coaching</a>
+                    <span class="slide-extra-tag"><i class="fa-solid fa-users"></i> Friendly Community</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4: Tabata Fit In Workout Class -->
+            <div class="program-slide" data-index="3">
+              <div class="slide-content-grid">
+                <div class="slide-poster-col">
+                  <div class="slide-poster-card" data-img="assets/program_tabata_workout.jpg">
+                    <img src="assets/program_tabata_workout.jpg" alt="Tabata Fit In Workout Class at Bell Corner" class="slide-poster-img">
+                    <div class="card-zoom-overlay">
+                      <span class="card-zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Click to Zoom</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="slide-info-col">
+                  <span class="slide-badge"><i class="fa-solid fa-dumbbell"></i> Fitness & Workout</span>
+                  <h3 class="slide-title">Tabata Fit In Workout Class</h3>
+                  <p class="slide-desc">Burn calories and build strength with our energetic Tabata workout sessions! Join us every Wednesday morning for high-intensity interval training paired with post-exercise recovery nutrition.</p>
+                  <ul class="slide-list">
+                    <li><i class="fa-solid fa-circle-check"></i> Every Wednesday | 9:00 AM – 10:00 AM</li>
+                    <li><i class="fa-solid fa-circle-check"></i> RM 180 / 4 High-Energy Classes</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Includes Post-Exercise Recovery Protein Nutrition</li>
+                  </ul>
+                  <div class="slide-cta-row">
+                    <a href="#contact" class="btn btn-primary" id="btnJoinTabata">Join Tabata Class</a>
+                    <span class="slide-extra-tag"><i class="fa-solid fa-bolt"></i> Recovery Drink Included</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Carousel Pagination Indicators -->
+          <div class="carousel-dots-container" id="carouselDots">
+            <button class="carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+            <button class="carousel-dot" data-slide="2" aria-label="Slide 3"></button>
+            <button class="carousel-dot" data-slide="3" aria-label="Slide 4"></button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CUSTOMER RESULTS & TRANSFORMATION SECTION ==================== -->
+    <section class="section" id="results">
+      <div class="container text-center">
+        <span class="section-tag" id="resultsTag"><i class="fa-solid fa-star"></i> Real Community Stories</span>
+        <h2 class="section-title" id="resultsTitle">Customer <span class="text-gradient">Transformations & Results</span></h2>
+        <p class="section-subtitle" id="resultsSubtitle">Discover real life-changing health journeys, active energy boosts, and inspiring community results.</p>
+
+        <div class="video-container-card">
+          <div class="video-wrapper">
+            <video class="result-video" controls autoplay muted loop playsinline poster="assets/hero_meal_poster.jpg">
+              <source src="assets/herbal_life.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="video-badge-row">
+            <span class="video-badge"><i class="fa-solid fa-circle-check"></i> Real Customer Results</span>
+            <span class="video-badge"><i class="fa-solid fa-bolt"></i> Active & Energized</span>
+            <span class="video-badge"><i class="fa-solid fa-heart"></i> Healthy Lifestyle Transformation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== LOCATION & CONTACT ==================== -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="text-center">
+          <span class="section-tag" id="contactTag"><i class="fa-solid fa-location-dot"></i> Visit <span
+              class="notranslate" translate="no">Bell Corner</span></span>
+          <h2 class="section-title" id="contactTitle">Come Say Hi in <span class="text-gradient">Bandar Mahkota
+              Cheras</span></h2>
+          <p class="section-subtitle" id="contactSubtitle">We can't wait to serve you your first nutrition meal! Drop by
+            our club or message us below.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Information Card -->
+          <div class="info-card" id="infoCard">
+            <div class="info-item">
+              <div class="info-icon"><i class="fa-solid fa-map-pin"></i></div>
+              <div class="info-detail">
+                <h4>Address & Location</h4>
+                <p>2a, 2, Jln Temenggung 17/9,<br>Bandar Mahkota Cheras, 43200 Cheras, Selangor</p>
+                <a href="https://maps.app.goo.gl/Nk5PqchMUoNeMSuF6" target="_blank" rel="noopener noreferrer" class="map-link-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Get Directions (Google Maps)
+                </a>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+              <div class="info-detail">
+                <h4>Operating Hours</h4>
+                <p>Monday - Saturday: 7:30 AM – 6:00 PM<br>Sunday: 8:00 AM – 2:00 PM</p>
+              </div>
+            </div>
+
+            <div class="info-item">
+              <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div class="info-detail">
+                <h4>Contact Info</h4>
+                <p>Email: yeehen@gmail.com<br>WhatsApp: 017-256 2112</p>
+              </div>
+            </div>
+
+            <div class="whatsapp-box">
+              <div>
+                <strong style="color: var(--text-primary);">Prefer Quick Chat?</strong>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0;">Connect with <span
+                    class="notranslate" translate="no">Bell Corner</span>
+                  instantly on WhatsApp.</p>
+              </div>
+              <a href="https://api.whatsapp.com/send?phone=60172562112&text=Hi%20Bell%20Corner!%20I%20would%20like%20to%20know%20more%20about%20your%20nutrition%20meals."
+                target="_blank" rel="noopener noreferrer" class="whatsapp-btn" id="btnWaDirect" onclick="handleWhatsAppClick(event, 'Hi Bell Corner! I would like to know more about your nutrition meals.')">
+                <i class="fa-brands fa-whatsapp"></i> Chat Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form" id="contactFormBox">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Send Us a Message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="contactName">Your Name</label>
+                <input type="text" id="contactName" class="form-control" placeholder="e.g. Alex Tan" required>
+              </div>
+
+              <div class="form-group">
+                <label for="contactPhone">Phone / WhatsApp Number</label>
+                <input type="tel" id="contactPhone" class="form-control" placeholder="e.g. 017-256 2112" required>
+              </div>
+
+              <div class="form-group">
+                <label for="contactService">I am interested in:</label>
+                <select id="contactService" class="form-control">
+                  <option value="Ordering Nutrition Meal">Ordering Gourmet Nutrition Meals</option>
+                  <option value="21-Day Transformation Challenge">21-Day Transformation Challenge</option>
+                  <option value="1-on-1 Wellness & Meal Coaching">1-on-1 Health & Meal Coaching</option>
+                  <option value="Daily Nutrition Club Pass">Daily Nutrition Club Pass</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="contactMessage">Message / Notes (Optional)</label>
+                <textarea id="contactMessage" class="form-control" rows="3"
+                  placeholder="Tell us about your meal & health preferences..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;"
+                id="btnSubmitForm">
+                <i class="fa-paper-plane fa-solid"></i> Submit & Chat
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="brand-logo">
+            <img src="assets/logo_v2.png" alt="Bell Corner Logo" class="brand-logo-img"
+              style="width: 92px; height: 92px;">
+            <span style="color: #000000 !important; -webkit-text-fill-color: #000000 !important;" class="notranslate"
+              translate="no">Bell Corner</span>
+          </a>
+          <p>Bandar Mahkota Cheras' favorite healthy lifestyle corner. Empowering individuals through good nutrition
+            meals, delicious protein shakes, and positive community coaching.</p>
+
+          <div class="social-links">
+            <a href="https://api.whatsapp.com/send?phone=60172562112" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp" id="socWa" onclick="handleWhatsAppClick(event, '')"><i
+                class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.facebook.com/bellleong21/" target="_blank" rel="noopener noreferrer" class="social-icon"
+              aria-label="Facebook Page" id="socFb" onclick="handleFacebookClick(event, 'https://www.facebook.com/bellleong21/')"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://maps.app.goo.gl/Nk5PqchMUoNeMSuF6" target="_blank" rel="noopener noreferrer" class="social-icon"
+              aria-label="Google Maps Location" id="socMap" title="Open in Google Maps"><i class="fa-solid fa-map-location-dot"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#about">About Nutrition Meals</a></li>
+            <li><a href="#menu">Meal Menu</a></li>
+            <li><a href="#calculator">Protein Calculator</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <ul class="footer-links">
+            <li><a href="#programs" onclick="jumpToProgramSlide(0)">5-Day Body Detox</a></li>
+            <li><a href="#programs" onclick="jumpToProgramSlide(1)">Body Index Scan & Health Check</a></li>
+            <li><a href="#programs" onclick="jumpToProgramSlide(2)">Daily Nutrition Club & Coaching</a></li>
+            <li><a href="#programs" onclick="jumpToProgramSlide(3)">Tabata Fit In Workout Class</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Location</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+            2a, 2, Jln Temenggung 17/9, Bandar Mahkota Cheras, 43200 Cheras, Selangor
+          </p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);">
+            Open Mon - Sat 7:30am - 6:00pm
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 <span class="notranslate" translate="no">Bell Corner</span> (Bandar Mahkota Cheras). All rights
+          reserved.</p>
+        <p>Crafted for Healthy Community Vibes</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Image Zoom Lightbox Modal -->
+  <div class="lightbox-modal" id="imageZoomModal">
+    <span class="lightbox-close" id="lightboxCloseBtn">&times;</span>
+    <div class="lightbox-body">
+      <img src="" alt="Zoomed Poster Image" class="lightbox-img" id="lightboxZoomImg">
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="app.js?v=4"></script>
+
+  <!-- Google Translate Element Initialization -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript"
+    src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+
+</html>
