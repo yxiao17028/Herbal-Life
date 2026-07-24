@@ -302,7 +302,24 @@ function switchLanguage(langCode) {
   if (card) card.classList.remove('show');
 }
 
+function startGoogleTranslateCleaner() {
+  setInterval(() => {
+    if (document.body.style.top && document.body.style.top !== '0px') {
+      document.body.style.top = '0px';
+    }
+    const bannerFrames = document.querySelectorAll('.goog-te-banner-frame, iframe.skiptranslate, iframe[class*="goog-te-banner"]');
+    bannerFrames.forEach(frame => {
+      frame.style.display = 'none';
+      frame.style.visibility = 'hidden';
+      frame.style.opacity = '0';
+      frame.style.height = '0';
+    });
+  }, 200);
+}
+
 function initLanguageSelector() {
+  startGoogleTranslateCleaner();
+
   document.addEventListener('click', (e) => {
     const card = document.getElementById('langDropdownCard');
     const btn = document.getElementById('langBtn');

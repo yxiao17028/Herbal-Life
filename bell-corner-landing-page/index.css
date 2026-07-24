@@ -1517,13 +1517,35 @@ button {
 /* --------------------------------------------------------------------------
    Google Translate Overrides & Language Selector Card (Image 1 Style)
    -------------------------------------------------------------------------- */
-.goog-te-banner-frame {
+/* Hide Google Translate Top Banner Toolbar & Tooltips Completely */
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe[class*="goog-te-banner"],
+iframe[id*=":1.container"],
+iframe[id*=":2.container"],
+.goog-te-banner,
+#goog-gt-tt,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
   display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  pointer-events: none !important;
 }
 
 body {
   top: 0px !important;
   position: static !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
 }
 
 .goog-te-gadget {
