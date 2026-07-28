@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "herbal-life",
+  "compatibility_date": "2026-07-28",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "bell-corner-landing-page"
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
