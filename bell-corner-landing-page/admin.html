@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bell Corner Admin — Content Management</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+  <!-- ==================== LOGIN OVERLAY ==================== -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <img src="assets/logo_v2.png" alt="Bell Corner Logo" class="login-logo">
+      <h1>Admin Login</h1>
+      <p class="login-subtitle">Enter your password to access the CMS dashboard</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="Enter admin password" required
+            autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100;">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </button>
+        <p class="login-error" id="loginError"></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== ADMIN LAYOUT ==================== -->
+  <div class="admin-layout" id="adminLayout" style="display: none;">
+
+    <!-- Mobile Sidebar Overlay -->
+    <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-brand">
+        <img src="assets/logo_v2.png" alt="Logo">
+        <div class="brand-text">
+          <span class="brand-name">Bell Corner</span>
+          <span class="brand-role">CMS Admin</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-label">Overview</div>
+        <div class="sidebar-nav-item active" data-section="dashboard">
+          <i class="fa-solid fa-gauge-high"></i> Dashboard
+        </div>
+
+        <div class="sidebar-nav-label">Content Modules</div>
+        <div class="sidebar-nav-item" data-section="hero">
+          <i class="fa-solid fa-house"></i> Hero Section
+        </div>
+        <div class="sidebar-nav-item" data-section="about">
+          <i class="fa-solid fa-info-circle"></i> About Section
+        </div>
+        <div class="sidebar-nav-item" data-section="about-us">
+          <i class="fa-solid fa-users"></i> About Us Section
+        </div>
+        <div class="sidebar-nav-item" data-section="menu">
+          <i class="fa-solid fa-utensils"></i> Menu Posters
+        </div>
+        <div class="sidebar-nav-item" data-section="programs">
+          <i class="fa-solid fa-trophy"></i> Programs
+        </div>
+        <div class="sidebar-nav-item" data-section="video">
+          <i class="fa-solid fa-video"></i> Video Section
+        </div>
+        <div class="sidebar-nav-item" data-section="contact">
+          <i class="fa-solid fa-phone"></i> Contact Info
+        </div>
+
+        <div class="sidebar-nav-label">System</div>
+        <div class="sidebar-nav-item" data-section="settings">
+          <i class="fa-solid fa-gear"></i> Site Settings
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="sidebar-footer-btn" onclick="AdminApp.previewSite()">
+          <i class="fa-solid fa-external-link"></i> Preview Site
+        </button>
+        <button class="sidebar-footer-btn" style="margin-top: 0.5rem;" onclick="AdminApp.logout()">
+          <i class="fa-solid fa-right-from-bracket"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div class="admin-main">
+
+      <!-- Top Header Bar -->
+      <header class="admin-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <h2 id="headerTitle"><i class="fa-solid fa-gauge-high"></i> Dashboard</h2>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-outline btn-sm" onclick="AdminApp.previewSite()">
+            <i class="fa-solid fa-eye"></i> Preview
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="AdminApp.exportData()">
+            <i class="fa-solid fa-download"></i> Export
+          </button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div class="admin-content">
+
+        <!-- ==================== DASHBOARD PANEL ==================== -->
+        <div class="admin-panel active" id="panel-dashboard">
+          <div class="panel-header">
+            <div>
+              <h3>Welcome to Bell Corner CMS</h3>
+              <p>Manage your website content, images, videos, and programs all in one place.</p>
+            </div>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon green"><i class="fa-solid fa-utensils"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statMenuCount">0</div>
+                <div class="stat-label">Menu Posters</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon blue"><i class="fa-solid fa-trophy"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statProgramCount">0</div>
+                <div class="stat-label">Programs</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon yellow"><i class="fa-solid fa-video"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statVideoCount">0</div>
+                <div class="stat-label">Videos</div>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon red"><i class="fa-solid fa-database"></i></div>
+              <div class="stat-info">
+                <div class="stat-value" id="statStatus">—</div>
+                <div class="stat-label">Data Status</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <h4 style="margin-bottom: 0.75rem; font-size: 1rem;">Quick Actions</h4>
+          <div class="quick-actions-grid">
+            <div class="quick-action-card" onclick="AdminApp.switchSection('hero')">
+              <i class="fa-solid fa-house"></i>
+              <h4>Edit Hero</h4>
+              <p>Update hero banner text & image</p>
+            </div>
+            <div class="quick-action-card" onclick="AdminApp.switchSection('menu')">
+              <i class="fa-solid fa-images"></i>
+              <h4>Manage Menu</h4>
+              <p>Add, edit, or remove menu posters</p>
+            </div>
+            <div class="quick-action-card" onclick="AdminApp.switchSection('programs')">
+              <i class="fa-solid fa-trophy"></i>
+              <h4>Manage Programs</h4>
+              <p>CRUD wellness programs</p>
+            </div>
+            <div class="quick-action-card" onclick="AdminApp.switchSection('contact')">
+              <i class="fa-solid fa-phone"></i>
+              <h4>Update Contact</h4>
+              <p>Change address, hours & phone</p>
+            </div>
+            <div class="quick-action-card" onclick="AdminApp.switchSection('about-us')">
+              <i class="fa-solid fa-users"></i>
+              <h4>Edit About Us</h4>
+              <p>Update story, stats & pillars</p>
+            </div>
+          </div>
+
+          <!-- Data Management -->
+          <div class="card" style="margin-top: 2rem;">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-database"></i> Data Management</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Export your content as JSON backup, import from a previous backup, or reset all data to defaults.
+            </p>
+            <div class="import-export-row">
+              <button class="btn btn-primary" onclick="AdminApp.exportData()">
+                <i class="fa-solid fa-download"></i> Export JSON
+              </button>
+              <button class="btn btn-secondary" onclick="AdminApp.importData()">
+                <i class="fa-solid fa-upload"></i> Import JSON
+              </button>
+              <button class="btn btn-danger" onclick="AdminApp.resetData()">
+                <i class="fa-solid fa-rotate-left"></i> Reset to Defaults
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== HERO PANEL ==================== -->
+        <div class="admin-panel" id="panel-hero">
+          <div class="panel-header">
+            <div>
+              <h3>Hero Section</h3>
+              <p>Edit the main banner area — headline, description, badge, and hero image.</p>
+            </div>
+            <button class="btn btn-primary" onclick="AdminApp.saveHero()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="form-group">
+              <label for="heroBadgeInput">Badge Text</label>
+              <input type="text" id="heroBadgeInput" class="form-control"
+                placeholder="e.g. Fresh & Natural · Balanced Nutrition Meals">
+              <p class="form-hint">The small badge text shown above the title.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="heroTitleInput">Main Title</label>
+              <input type="text" id="heroTitleInput" class="form-control" placeholder="e.g. Health begins with meal">
+            </div>
+
+            <div class="form-group">
+              <label for="heroTitleHighlightInput">Title Highlight (Gradient Text)</label>
+              <input type="text" id="heroTitleHighlightInput" class="form-control"
+                placeholder="e.g. Achieve health through balanced nutrition.">
+              <p class="form-hint">The gradient-colored line below the main title.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="heroDescInput">Description</label>
+              <textarea id="heroDescInput" class="form-control" rows="4"
+                placeholder="Hero section description..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="heroImageInput">Hero Image Path</label>
+                <input type="text" id="heroImageInput" class="form-control"
+                  placeholder="assets/hero_meal_poster.jpg">
+                <p class="form-hint">Enter path or upload an image below.</p>
+              </div>
+              <div class="form-group">
+                <label>Upload Image</label>
+                <div class="upload-zone" style="padding: 1rem;">
+                  <input type="file" id="heroFileUpload" accept="image/*">
+                  <div class="upload-placeholder">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.2rem;"></i>
+                    <p style="font-size: 0.8rem;">Click to upload</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.5rem;">
+              <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Image Preview</label>
+              <img id="heroImagePreview" src="" alt="Preview" class="upload-preview" style="display: none; margin-top: 0.5rem; max-height: 180px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== ABOUT PANEL ==================== -->
+        <div class="admin-panel" id="panel-about">
+          <div class="panel-header">
+            <div>
+              <h3>About Section</h3>
+              <p>Edit the "About Meals" area — section tag, titles, text, image, and highlight cards.</p>
+            </div>
+            <button class="btn btn-primary" onclick="AdminApp.saveAbout()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-heading"></i> Section Text</h4>
+            </div>
+
+            <div class="form-group">
+              <label for="aboutTagInput">Section Tag</label>
+              <input type="text" id="aboutTagInput" class="form-control" placeholder="e.g. Clean Eating Concept">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="aboutTitleInput">Section Title</label>
+                <input type="text" id="aboutTitleInput" class="form-control"
+                  placeholder="e.g. Crafted for Modern Living:">
+              </div>
+              <div class="form-group">
+                <label for="aboutTitleHighlightInput">Title Highlight</label>
+                <input type="text" id="aboutTitleHighlightInput" class="form-control"
+                  placeholder="e.g. Aesthetic Nutrition Meals">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="aboutText1Input">Paragraph 1</label>
+              <textarea id="aboutText1Input" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="aboutText2Input">Paragraph 2</label>
+              <textarea id="aboutText2Input" class="form-control" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="aboutImageInput">About Image Path</label>
+                <input type="text" id="aboutImageInput" class="form-control"
+                  placeholder="assets/about_meal_v2.jpg">
+              </div>
+              <div class="form-group">
+                <label>Upload Image</label>
+                <div class="upload-zone" style="padding: 1rem;">
+                  <input type="file" id="aboutFileUpload" accept="image/*">
+                  <div class="upload-placeholder">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.2rem;"></i>
+                    <p style="font-size: 0.8rem;">Click to upload</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <img id="aboutImagePreview" src="" alt="Preview" class="upload-preview" style="display: none; margin-top: 0.5rem; max-height: 160px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          </div>
+
+          <!-- Highlights Editor -->
+          <div class="card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-check-double"></i> Highlights</h4>
+              <button class="btn btn-outline btn-sm" onclick="AdminApp.addHighlight()">
+                <i class="fa-solid fa-plus"></i> Add Highlight
+              </button>
+            </div>
+            <div id="aboutHighlightsList"></div>
+          </div>
+        </div>
+
+        <!-- ==================== ABOUT US PANEL ==================== -->
+        <div class="admin-panel" id="panel-about-us">
+          <div class="panel-header">
+            <div>
+              <h3>About Us Section</h3>
+              <p>Edit the main "About Us" section — club story, section title, image, statistics, and core pillars.</p>
+            </div>
+            <button class="btn btn-primary" onclick="AdminApp.saveAboutUs()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-heading"></i> Section Text & Story</h4>
+            </div>
+
+            <div class="form-group">
+              <label for="aboutUsTagInput">Section Tag</label>
+              <input type="text" id="aboutUsTagInput" class="form-control" placeholder="e.g. Our Story & Mission">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="aboutUsTitleInput">Section Title</label>
+                <input type="text" id="aboutUsTitleInput" class="form-control" placeholder="e.g. About">
+              </div>
+              <div class="form-group">
+                <label for="aboutUsTitleHighlightInput">Title Highlight (Gradient)</label>
+                <input type="text" id="aboutUsTitleHighlightInput" class="form-control" placeholder="e.g. Bell Corner">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="aboutUsSubtitleInput">Subtitle</label>
+              <input type="text" id="aboutUsSubtitleInput" class="form-control" placeholder="Subtitle text...">
+            </div>
+
+            <div class="form-group">
+              <label for="aboutUsText1Input">Story Paragraph 1</label>
+              <textarea id="aboutUsText1Input" class="form-control" rows="3" placeholder="First paragraph..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="aboutUsText2Input">Story Paragraph 2</label>
+              <textarea id="aboutUsText2Input" class="form-control" rows="3" placeholder="Second paragraph..."></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="aboutUsImageInput">About Us Image Path</label>
+                <input type="text" id="aboutUsImageInput" class="form-control" placeholder="assets/about_meal.png">
+              </div>
+              <div class="form-group">
+                <label>Upload Image</label>
+                <div class="upload-zone" style="padding: 1rem;">
+                  <input type="file" id="aboutUsFileUpload" accept="image/*">
+                  <div class="upload-placeholder">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.2rem;"></i>
+                    <p style="font-size: 0.8rem;">Click to upload</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <img id="aboutUsImagePreview" src="" alt="Preview" class="upload-preview" style="display: none; margin-top: 0.5rem; max-height: 160px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          </div>
+
+          <!-- Stats Editor -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-chart-simple"></i> Club Statistics</h4>
+              <button class="btn btn-outline btn-sm" onclick="AdminApp.addAboutUsStat()">
+                <i class="fa-solid fa-plus"></i> Add Stat
+              </button>
+            </div>
+            <div id="aboutUsStatsList"></div>
+          </div>
+
+          <!-- Pillars Editor -->
+          <div class="card">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-layer-group"></i> Core Pillars & Features</h4>
+              <button class="btn btn-outline btn-sm" onclick="AdminApp.addAboutUsPillar()">
+                <i class="fa-solid fa-plus"></i> Add Pillar
+              </button>
+            </div>
+            <div id="aboutUsPillarsList"></div>
+          </div>
+        </div>
+
+        <!-- ==================== MENU POSTERS PANEL ==================== -->
+        <div class="admin-panel" id="panel-menu">
+          <div class="panel-header">
+            <div>
+              <h3>Menu Posters</h3>
+              <p>Manage the meal menu poster images shown in the carousel slider.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <span style="font-size: 0.82rem; color: var(--text-secondary);" id="menuPosterCount">0 Posters</span>
+              <button class="btn btn-primary" onclick="AdminApp.showPosterModal()">
+                <i class="fa-solid fa-plus"></i> Add Poster
+              </button>
+            </div>
+          </div>
+
+          <div class="image-grid" id="menuPosterGrid"></div>
+        </div>
+
+        <!-- ==================== PROGRAMS PANEL ==================== -->
+        <div class="admin-panel" id="panel-programs">
+          <div class="panel-header">
+            <div>
+              <h3>Wellness Programs</h3>
+              <p>Manage the programs and coaching offerings displayed on the website.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <span style="font-size: 0.82rem; color: var(--text-secondary);" id="programCount">0 Programs</span>
+              <button class="btn btn-primary" onclick="AdminApp.showProgramModal()">
+                <i class="fa-solid fa-plus"></i> Add Program
+              </button>
+            </div>
+          </div>
+
+          <div class="program-list" id="programsList"></div>
+        </div>
+
+        <!-- ==================== VIDEO PANEL ==================== -->
+        <div class="admin-panel" id="panel-video">
+          <div class="panel-header">
+            <div>
+              <h3>Video Section</h3>
+              <p>Manage the customer results video and section text.</p>
+            </div>
+            <button class="btn btn-primary" onclick="AdminApp.saveVideo()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="videoSrcInput">Video File Path</label>
+                <input type="text" id="videoSrcInput" class="form-control" placeholder="assets/herbal_life.mp4">
+                <p class="form-hint">Path to MP4 video in assets folder.</p>
+              </div>
+              <div class="form-group">
+                <label for="videoPosterInput">Video Poster Image</label>
+                <input type="text" id="videoPosterInput" class="form-control"
+                  placeholder="assets/hero_meal_poster.jpg">
+                <p class="form-hint">Thumbnail shown before video plays.</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="videoTitleInput">Section Title</label>
+                <input type="text" id="videoTitleInput" class="form-control" placeholder="e.g. Customer">
+              </div>
+              <div class="form-group">
+                <label for="videoTitleHighlightInput">Title Highlight</label>
+                <input type="text" id="videoTitleHighlightInput" class="form-control"
+                  placeholder="e.g. Transformations & Results">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="videoSubtitleInput">Subtitle</label>
+              <textarea id="videoSubtitleInput" class="form-control" rows="2"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="videoDisclaimerInput">Disclaimer Text</label>
+              <input type="text" id="videoDisclaimerInput" class="form-control"
+                placeholder="Disclaimer: Product Results...">
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== CONTACT PANEL ==================== -->
+        <div class="admin-panel" id="panel-contact">
+          <div class="panel-header">
+            <div>
+              <h3>Contact Information</h3>
+              <p>Update your address, operating hours, phone number, and WhatsApp details.</p>
+            </div>
+            <button class="btn btn-primary" onclick="AdminApp.saveContact()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="form-group">
+              <label for="contactAddressInput">Address</label>
+              <textarea id="contactAddressInput" class="form-control" rows="2"
+                placeholder="Full address..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMapsInput">Google Maps Link</label>
+              <input type="url" id="contactMapsInput" class="form-control"
+                placeholder="https://maps.app.goo.gl/...">
+            </div>
+
+            <div class="form-group">
+              <label for="contactHoursInput">Operating Hours</label>
+              <textarea id="contactHoursInput" class="form-control" rows="2"
+                placeholder="Monday - Saturday: 7:30 AM – 10:30 AM&#10;Sunday: OFF"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactEmailInput">Email</label>
+                <input type="email" id="contactEmailInput" class="form-control" placeholder="email@example.com">
+              </div>
+              <div class="form-group">
+                <label for="contactPhoneInput">Phone Number</label>
+                <input type="text" id="contactPhoneInput" class="form-control" placeholder="017-256 2112">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactWhatsappInput">WhatsApp Number (International Format)</label>
+              <input type="text" id="contactWhatsappInput" class="form-control"
+                placeholder="60172562112">
+              <p class="form-hint">No + sign or dashes. e.g. 60172562112</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== SITE SETTINGS PANEL ==================== -->
+        <div class="admin-panel" id="panel-settings">
+          <div class="panel-header">
+            <div>
+              <h3>Site Settings</h3>
+              <p>Manage the website title, meta description, and logo.</p>
+            </div>
+            <button class="btn btn-primary" onclick="AdminApp.saveSettings()">
+              <i class="fa-solid fa-floppy-disk"></i> Save Changes
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="form-group">
+              <label for="siteTitleInput">Site Title</label>
+              <input type="text" id="siteTitleInput" class="form-control"
+                placeholder="Bell Corner | Fresh Healthy Nutrition Meals">
+              <p class="form-hint">Shown in browser tab and search engine results.</p>
+            </div>
+
+            <div class="form-group">
+              <label for="siteMetaDescInput">Meta Description</label>
+              <textarea id="siteMetaDescInput" class="form-control" rows="3"
+                placeholder="SEO meta description..."></textarea>
+              <p class="form-hint">Recommended 150-160 characters for optimal SEO.</p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="siteLogoInput">Logo Image Path</label>
+                <input type="text" id="siteLogoInput" class="form-control" placeholder="assets/logo_v2.png">
+              </div>
+              <div class="form-group">
+                <label>Upload Logo</label>
+                <div class="upload-zone" style="padding: 1rem;">
+                  <input type="file" id="siteLogoFileUpload" accept="image/*">
+                  <div class="upload-placeholder">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.2rem;"></i>
+                    <p style="font-size: 0.8rem;">Click to upload</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <img id="siteLogoPreview" src="" alt="Logo Preview" class="upload-preview" style="display: none; margin-top: 0.5rem; max-height: 100px; border-radius: var(--radius-md); background: #fff; padding: 0.5rem;">
+          </div>
+
+          <!-- Data Management in Settings too -->
+          <div class="card" style="margin-top: 1.5rem;">
+            <div class="card-header">
+              <h4><i class="fa-solid fa-database"></i> Data Management</h4>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Backup, restore, or reset all CMS content data.
+            </p>
+            <div class="import-export-row">
+              <button class="btn btn-primary" onclick="AdminApp.exportData()">
+                <i class="fa-solid fa-download"></i> Export JSON
+              </button>
+              <button class="btn btn-secondary" onclick="AdminApp.importData()">
+                <i class="fa-solid fa-upload"></i> Import JSON
+              </button>
+              <button class="btn btn-danger" onclick="AdminApp.resetData()">
+                <i class="fa-solid fa-rotate-left"></i> Reset All Data
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== POSTER MODAL ==================== -->
+  <div class="modal-overlay" id="posterModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="posterModalTitle"><i class="fa-solid fa-plus"></i> Add New Poster</h3>
+        <button class="modal-close" onclick="AdminApp.closePosterModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="posterForm" onsubmit="event.preventDefault(); AdminApp.savePoster();">
+          <div class="form-group">
+            <label for="posterTitleInput">Poster Title / Alt Text</label>
+            <input type="text" id="posterTitleInput" class="form-control" placeholder="e.g. Healthy Dessert Poster"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="posterImagePathInput">Image Path</label>
+            <input type="text" id="posterImagePathInput" class="form-control"
+              placeholder="assets/menu_poster_x.jpg" required>
+            <p class="form-hint">Enter a path to an image in the assets folder, or upload below.</p>
+          </div>
+
+          <div class="form-group">
+            <label>Or Upload Image</label>
+            <div class="upload-zone" style="padding: 1.25rem;">
+              <input type="file" id="posterFileUpload" accept="image/*">
+              <div class="upload-placeholder">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>Drag & drop or click to upload</p>
+                <p class="upload-hint">JPG, PNG, WebP — max 5MB recommended</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 0.5rem;">
+            <label style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Preview</label>
+            <img id="posterModalPreview" src="" alt="Preview" class="upload-preview"
+              style="display: none; margin-top: 0.5rem; max-height: 200px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="AdminApp.closePosterModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="AdminApp.savePoster()">
+          <i class="fa-solid fa-check"></i> Save Poster
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PROGRAM MODAL ==================== -->
+  <div class="modal-overlay" id="programModal">
+    <div class="modal" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 id="programModalTitle"><i class="fa-solid fa-plus"></i> Add New Program</h3>
+        <button class="modal-close" onclick="AdminApp.closeProgramModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="programForm" onsubmit="event.preventDefault(); AdminApp.saveProgram();">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="progBadgeInput">Badge Label</label>
+              <input type="text" id="progBadgeInput" class="form-control"
+                placeholder="e.g. Featured Detox Reset">
+            </div>
+            <div class="form-group">
+              <label for="progBadgeIconInput">Badge Icon (FontAwesome)</label>
+              <input type="text" id="progBadgeIconInput" class="form-control" placeholder="fa-leaf">
+              <p class="form-hint">e.g. fa-leaf, fa-heart-pulse, fa-dumbbell</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="progTitleInput">Program Title</label>
+            <input type="text" id="progTitleInput" class="form-control" placeholder="e.g. 5-Day Body Detox"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="progDescInput">Description</label>
+            <textarea id="progDescInput" class="form-control" rows="3"
+              placeholder="Program description..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="progFeaturesInput">Features (One per line)</label>
+            <textarea id="progFeaturesInput" class="form-control" rows="4"
+              placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea>
+            <p class="form-hint">Enter each feature on a separate line. These show as bullet points.</p>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="progCtaInput">CTA Button Text</label>
+              <input type="text" id="progCtaInput" class="form-control" placeholder="e.g. Enroll Now">
+            </div>
+            <div class="form-group">
+              <label for="progExtraTagInput">Extra Tag Text</label>
+              <input type="text" id="progExtraTagInput" class="form-control"
+                placeholder="e.g. 100% Natural Ingredients">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="progImageInput">Program Image Path</label>
+              <input type="text" id="progImageInput" class="form-control"
+                placeholder="assets/program_xxx.jpg">
+            </div>
+            <div class="form-group">
+              <label>Upload Image</label>
+              <div class="upload-zone" style="padding: 1rem;">
+                <input type="file" id="progFileUpload" accept="image/*">
+                <div class="upload-placeholder">
+                  <i class="fa-solid fa-cloud-arrow-up" style="font-size: 1.2rem;"></i>
+                  <p style="font-size: 0.8rem;">Click to upload</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <img id="progModalPreview" src="" alt="Preview" class="upload-preview"
+            style="display: none; margin-top: 0.5rem; max-height: 160px; border-radius: var(--radius-md); border: 1px solid var(--border);">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="AdminApp.closeProgramModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="AdminApp.saveProgram()">
+          <i class="fa-solid fa-check"></i> Save Program
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Script -->
+  <script src="admin.js"></script>
+
+</body>
+
+</html>

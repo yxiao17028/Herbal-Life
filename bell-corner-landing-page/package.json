@@ -1,0 +1,13 @@
+{
+  "name": "bell-corner-landing-page",
+  "version": "1.0.0",
+  "description": "Bell Corner Landing Page & Admin CMS",
+  "main": "index.html",
+  "scripts": {
+    "deploy": "firebase deploy",
+    "deploy:hosting": "firebase deploy --only hosting"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
