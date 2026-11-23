@@ -533,17 +533,24 @@ function initContactForm() {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('contactName').value.trim();
-    const phone = document.getElementById('contactPhone').value.trim();
-    const service = document.getElementById('contactService').value;
-    const message = document.getElementById('contactMessage').value.trim();
+    const name = document.getElementById('contactName')?.value.trim() || '';
+    const age = document.getElementById('contactAge')?.value.trim() || '';
+    const height = document.getElementById('contactHeight')?.value.trim() || '';
+    const area = document.getElementById('contactArea')?.value.trim() || '';
+    const service = document.getElementById('contactService')?.value || '';
+    const message = document.getElementById('contactMessage')?.value.trim() || '';
 
-    if (!name || !phone) {
-      showToast('Please fill in your name and phone number.');
+    if (!name) {
+      showToast('Please fill in your name.');
       return;
     }
 
-    const waText = `Hi Bell Corner! My name is ${name} (${phone}). I am interested in ${service}. Message: ${message}`;
+    let waText = `Hi Bell Corner! My name is ${name}.`;
+    if (age) waText += `\nAge: ${age}`;
+    if (height) waText += `\nHeight: ${height}`;
+    if (area) waText += `\nArea: ${area}`;
+    if (service) waText += `\nI am interested in: ${service}`;
+    if (message) waText += `\nMessage: ${message}`;
 
     showToast('Thank you! Redirecting to WhatsApp to chat with Bell Corner...');
     
